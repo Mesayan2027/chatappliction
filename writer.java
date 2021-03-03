@@ -15,20 +15,23 @@ public class writer implements Runnable{
          writer w=new writer();
          Thread t=new Thread(w);
          t.start();
+         //thread for writing massages in text area
     }
     public void writere(JFrame f){
-            JPanel viewpanel1 = new JPanel();
-            viewpanel1.setBorder(new TitledBorder(new EtchedBorder(), "your text"));
-            l1 = new JTextArea(5, 20);
-            this.l1=l1;
-            l1.setEditable(false);
-            JScrollPane scrollPane = new JScrollPane(l1);
-            scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            viewpanel1.add(scrollPane);
-            f.add(viewpanel1, BorderLayout.NORTH);
-            f.setVisible(true);
-            f.setSize(400, 400);
-            f.setResizable(true);
+         JPanel viewpanel1 = new JPanel();
+         //this panel consists the text from the others
+         viewpanel1.setBorder(new TitledBorder(new EtchedBorder(), "your text"));
+         l1 = new JTextArea(5, 20);
+         //the text area containing massage
+         l1.setEditable(false);
+         JScrollPane scrollPane = new JScrollPane(l1);
+         //scrollpane for scroll
+         scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+         viewpanel1.add(scrollPane);
+         f.add(viewpanel1, BorderLayout.NORTH);
+         f.setVisible(true);
+         f.setSize(400, 400);
+         f.setResizable(true);
     }
     @Override
         public void run() {
