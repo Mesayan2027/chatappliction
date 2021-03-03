@@ -1,3 +1,4 @@
+//TODO:to run the full server and client first run server and then client also the writer class is necessary
 package com.company;
 
 import javax.imageio.ImageIO;
@@ -15,6 +16,7 @@ public class client {
     public static void main(String[] args) throws IOException {
             gui g=new gui();
             g.nameinput();
+            //making the code runnable
     }
 }
 class gui extends JPanel implements Runnable {
@@ -26,13 +28,18 @@ class gui extends JPanel implements Runnable {
     static String pat;
     static Socket imso;
     public void nameinput(){
+        //nameinput class
         JFrame fn = new JFrame();
+        //frame for name input
         JButton bu = new JButton("enter");
+        //enter button
         bu.setSize(80, 20);
         JTextField tf = new JTextField();
+        //textfield
         tf.setSize( 50, 20);
         tf.setBackground(Color.BLUE);
         JLabel l=new JLabel("*enter your name you want people to know you as!!*");
+        //label
         JPanel pa=new JPanel(new BorderLayout());
         pa.add(bu,BorderLayout.NORTH);
         pa.add(tf,BorderLayout.CENTER);
@@ -45,6 +52,7 @@ class gui extends JPanel implements Runnable {
             public void actionPerformed(ActionEvent e) {
                 name = tf.getText();
                 if (!name.equals("")) {
+                    //progreassing to the chat ui class
                     gui g=new gui();
                     try {
                         g.ui(name);
@@ -55,6 +63,7 @@ class gui extends JPanel implements Runnable {
                 }
                 else{
                     JOptionPane.showMessageDialog(fn, "Please enter a valid name!", "Swing Tester", JOptionPane.ERROR_MESSAGE);
+                    //error massage if name is null and enter is pressed
                     tf.setText("");
                 }
             }
@@ -119,18 +128,24 @@ class gui extends JPanel implements Runnable {
                         if (f.length > 0) {
                             pat = fd.getFiles()[0].getAbsolutePath();
                         }
+                        //choosing file
                         BufferedImage img = ImageIO.read(new File(pat));
                         int scaleX = (int) (img.getWidth() * FACTOR);
                         int scaleY = (int) (img.getHeight() * FACTOR);
                         Image image = img.getScaledInstance(scaleX, scaleY, Image.SCALE_SMOOTH);
                         BufferedImage buffered = new BufferedImage(scaleX, scaleY, 1);
                         buffered.getGraphics().drawImage(image, 0, 0, null);
+                        //converting the file to buffered image
                         System.out.println(buffered);
+                        //TODO:the massage with image is not completed so please negate any component with the comment massage with image
                         JFrame msgwimg=new JFrame();
+                        //frame for massage with image
                         msgwimg.setSize(100,200);
                         JTextField msgwimgte=new JTextField();
+                        //textfield for massage with image
                         msgwimgte.setSize(20,80);
                         JButton msgwimgbu=new JButton("enter");
+                        //button for massage with image
                         msgwimgbu.setSize(20,80);
                         msgwimg.setVisible(true);
                         msgwimg.add(msgwimgte);
@@ -142,6 +157,7 @@ class gui extends JPanel implements Runnable {
                                 String msgforimg=msgwimgte.getText();
                                 try {
                                     ImageIO.write(buffered,"PNG",imso.getOutputStream());
+                                    //image writing
                                     msgwimg.dispose();
                                 } catch (IOException ioException) {
                                     ioException.printStackTrace();
@@ -157,6 +173,7 @@ class gui extends JPanel implements Runnable {
             imread threader=new imread(imso,name);
             Thread tr=new Thread(threader);
             tr.start();
+            //image reading thread
             viewpanel.add(scrollPane,BOTTOM_ALIGNMENT);
             viewpanel.add(sendb,BOTTOM_ALIGNMENT);
             viewpanel.add(tyour,CENTER_ALIGNMENT);
@@ -204,11 +221,12 @@ class imread implements Runnable{
                     if (img != null) {
                         System.out.println("works");
                         JFrame frame = new JFrame("user "+name);
+                        //frame for displaying image
                         JLabel im = new JLabel(new ImageIcon(img));
                         frame.getContentPane().add(im);
                         frame.pack();
                         frame.setVisible(true);
-                        //ImageIO.write(img,"png", new File("D:\\"));
+                        // TODO:image is not stored anywhere
                 }
             }
             catch (IOException e) {
@@ -218,4 +236,5 @@ class imread implements Runnable{
         }
     }
 }
+
 
